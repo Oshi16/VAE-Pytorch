@@ -6,9 +6,9 @@ import numpy as np
 from tqdm import tqdm
 from einops import rearrange
 from torch.optim import Adam
-from dataset.mnist_loader import MnistDataset
+from torchvision.datasets import MNIST
 from torch.utils.data import DataLoader
-
+from torchvision import transforms
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
