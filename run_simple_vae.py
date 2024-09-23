@@ -76,9 +76,14 @@ class VAEModel(nn.Module):
         
 
 def train_vae():
-    # Create the data set and the data loader
-    mnist = MnistDataset('train', im_path='data/train/images')
-    mnist_test = MnistDataset('test', im_path='data/test/images')
+    # Use torchvision's MNIST dataset
+    transform = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize((0.5,), (0.5,))
+    ])
+    mnist = MNIST(root='./data', train=True, transform=transform, download=True)
+    mnist_test = MNIST(root='./data', train=False, transform=transform, download=True)
+
     mnist_loader = DataLoader(mnist, batch_size=64, shuffle=True, num_workers=0)
     
     # Instantiate the model
